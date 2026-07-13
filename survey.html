@@ -83,7 +83,7 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
     // Prefill the Agenci survey. Standard fields work out of the box.
     // To ALSO prefill Instagram + "What best describes you", paste the two
     // custom-field "Query Keys" from Agenci (Settings → Custom Fields) below:
-    var CUSTOM_KEYS = { instagram: '', describes: '' };
+    var CUSTOM_KEYS = { instagram: 'contact.your_instagram_account', describes: 'contact.what_best_describes_you' };
 
     var qp = new URLSearchParams();
     if (lead.first_name) qp.set('first_name', lead.first_name);

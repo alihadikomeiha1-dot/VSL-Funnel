@@ -22,7 +22,10 @@ window.SITE = {
     id: "tk_0393281de65a409088ca0a78c8be38ae"
   },
 
-  // Where a successful booking redirects to.
+  // After the opt-in form submits, send the lead to the survey.
+  surveyUrl: "survey.html",
+
+  // Post-booking confirmation page (Agenci calendar redirects here after booking).
   thankYouUrl: "thank-you.html"
 };
 

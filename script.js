@@ -284,7 +284,15 @@ set('path-b', pathB.map((m) => `
     const go = () => {
       if (navigated) return;
       navigated = true;
-      location.href = (SITE.thankYouUrl || 'thank-you.html') + '?name=' + encodeURIComponent(firstName);
+      // hand the lead to the survey as URL params → survey/calendar prefill (sticky contact)
+      const q = new URLSearchParams({
+        first_name: firstName,
+        email: email,
+        phone: phone,
+        instagram: instagram,
+        describes: selectedDescribes,
+      });
+      location.href = (SITE.surveyUrl || 'survey.html') + '?' + q.toString();
     };
 
     // POST to Agenci.io — never let a slow/failed webhook block the booking

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- All IDs live in config.js — load it first so the snippets below can read it -->
+<script src="config.js"></script>
+
+<!-- Google Tag Manager (fires only when window.GTM_ID is set) -->
+<script>(function(){if(!window.GTM_ID)return;(function(w,d,s,l,i){w[l]=w[l]||[];
+w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',window.GTM_ID);})();</script>
+<!-- End Google Tag Manager -->
+
+<!-- Meta Pixel (base loader always defines fbq; init + PageView only when pixelId is set) -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;
+n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+if(window.SITE&&window.SITE.pixelId){fbq('init',window.SITE.pixelId);fbq('track','PageView');}</script>
+<!-- End Meta Pixel -->
+
+<!-- Agenci.io External Tracking (injects only when a tracking id is set) -->
+<script>(function(){var t=window.SITE&&window.SITE.agenciTracking;if(!t||!t.id)return;
+var s=document.createElement('script');s.async=true;s.src=t.src;
+s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</script>
+
+<title>Film Levant — Go from Invisible Expert to Industry Authority</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23050505'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='54' font-weight='700' fill='%23F3EEEA' text-anchor='middle'%3EF%3C/text%3E%3Ccircle cx='72' cy='30' r='7' fill='%23B82A2A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== BRAND BAR ===== -->
+<header class="brand-bar">
+  <div class="wrap brand-bar__inner">
+    <span class="logo">Film&nbsp;Lev<span class="accent">ant</span></span>
+    <a href="#book-a-call" class="btn btn--bar">Book Your Strategy Call<span class="dot dot--sm"></span></a>
+  </div>
+</header>
+
+<!-- ===== HERO / VSL ===== -->
+<section class="section hero" data-screen-label="Hero">
+  <div class="wrap hero__inner">
+    <div class="badge"><span class="dot dot--sm"></span>⚠️ WARNING! Doctors &amp; Professionals — Random posting won't save your business anymore</div>
+    <h1 class="hero__title">Go from Invisible Expert to <em class="accent-em">Industry Authority</em></h1>
+    <p class="hero__lede">With our done-with-you content system, without relying on guesswork, inconsistency, or wasting time filming yourself again.</p>
+
+    <!-- PLACEHOLDER: replace with the real VSL embed (video/iframe) -->
+    <div class="vsl-frame" data-placeholder="vsl-embed">
+      <div class="vsl-frame__center">
+        <div class="play-btn play-btn--lg"><span class="play-btn__triangle play-btn__triangle--lg"></span></div>
+        <span class="vsl-frame__hint">— paste your VSL embed here —</span>
+      </div>
+      <div class="sound-pill sound-pill--lg"><span class="dot dot--sm"></span>Enable sound</div>
+    </div>
+
+    <div class="hero__cta"><a href="#book-a-call" class="btn btn--lg">Book Your Strategy Call<span class="dot dot--md"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== WRITTEN TESTIMONIALS ===== -->
+<section class="section written" data-screen-label="Experts We've Helped">
+  <div class="wrap">
+    <h2 class="section__title written__title">Experts We've Helped to Scale</h2>
+    <div class="written__masonry" id="written-list"></div>
+    <div class="tc mt-26"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section class="section problem" data-screen-label="The Problem">
+  <div class="wrap">
+    <h2 class="section__title section__title--narrow">The Current Content Models Are Not Dying. They Are Already Dead</h2>
+    <div class="problem__grid" id="problem-list"></div>
+    <div class="tc mt-44"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== WHAT WORKS / INTRO SYSTEM ===== -->
+<section class="section system" data-screen-label="The System">
+  <div class="wrap system__inner">
+    <div class="eyebrow">What Works For Experts In 2025 And Beyond</div>
+    <h2 class="system__title">Introducing The Content Authority System<span class="accent">®</span></h2>
+    <div class="system__badge">FL</div>
+    <h3 class="system__subtitle">What is The Film Levant Authority System?</h3>
+    <p class="system__body">A complete done-with-you content production and strategy system that transforms invisible experts into recognized authorities through professional filming, strategic content planning, and consistent execution—without you wasting time on production.</p>
+    <div class="mt-36"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== OLD WAY vs FL WAY ===== -->
+<section class="section compare" data-screen-label="Old Way vs Film Levant">
+  <div class="wrap compare__wrap">
+    <h2 class="section__title section__title--narrow">Your Old Tactics Are Predictable, Messy, And Built To Break</h2>
+    <div class="compare__grid">
+      <div class="compare__card compare__card--old">
+        <h3 class="compare__heading compare__heading--old">The Old Way</h3>
+        <div class="compare__list" id="compare-old"></div>
+      </div>
+      <div class="compare__card compare__card--new">
+        <h3 class="compare__heading compare__heading--new">The Film Levant Way</h3>
+        <div class="compare__list" id="compare-new"></div>
+      </div>
+    </div>
+    <div class="tc mt-44"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== VIDEO TESTIMONIALS ===== -->
+<section class="section testimonials" data-screen-label="Video Testimonials">
+  <div class="wrap">
+    <h2 class="section__title section__title--narrow">Watch How These Experts Changed Their Lives After Switching To Film Levant</h2>
+    <div class="testimonials__grid" id="video-list"></div>
+    <div class="tc mt-44"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== MEET ALI KOMEIHA ===== -->
+<section class="section founder" data-screen-label="Meet Ali Komeiha">
+  <div class="wrap founder__inner">
+    <!-- PLACEHOLDER: replace with real portrait photo of Ali Komeiha -->
+    <div class="founder__portrait" data-placeholder="founder-portrait">
+      <span class="founder__portrait-logo">Film&nbsp;Lev<span class="accent">ant</span></span>
+      <span class="founder__portrait-hint">— portrait of Ali Komeiha —</span>
+    </div>
+    <div class="founder__content">
+      <div class="eyebrow eyebrow--left">Meet The Founder</div>
+      <h2 class="founder__name">Ali Komeiha</h2>
+      <div class="founder__subtitle">Founder of Film Levant · Creator of The Authority System<span class="accent">®</span></div>
+      <p class="founder__bio">Ali built The Film Levant Authority System to turn invisible experts into recognized authorities — handling professional filming, strategic content planning, and consistent execution end to end, so doctors, coaches, and consultants never lose another hour to guesswork or production again.</p>
+      <div class="stats" id="stats-list"></div>
+      <a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4 STEPS ===== -->
+<section class="section steps" data-screen-label="4 Steps">
+  <div class="wrap">
+    <h2 class="section__title section__title--narrow">The Film Levant Authority System Follows 4 Simple Steps</h2>
+    <div class="steps__grid" id="steps-list"></div>
+    <div class="tc mt-44"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== ISN'T FOR EVERYONE ===== -->
+<section class="section notfor" data-screen-label="Not For Everyone">
+  <div class="wrap notfor__inner">
+    <h2 class="section__title">The Film Levant Authority System Isn't For Everyone</h2>
+    <h3 class="notfor__subtitle">This is only for experts and professionals who:</h3>
+    <div class="notfor__list" id="notfor-list"></div>
+    <div class="mt-38"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== GUARANTEE ===== -->
+<section class="section guarantee" data-screen-label="Guarantee">
+  <div class="wrap guarantee__inner">
+    <h2 class="section__title">Our Risk-Free Authority Growth Guarantee</h2>
+    <p class="guarantee__lede">We guarantee that if you follow our system for 4 months—showing up for filming sessions and implementing our strategy—you will see measurable growth in visibility, engagement, and client inquiries. If you don't, we'll work with you until you do</p>
+    <div class="guarantee__card">
+      <h3 class="guarantee__card-title">We stand behind this guarantee because:</h3>
+      <div class="check-list" id="guarantee-list"></div>
+    </div>
+    <div class="mt-36"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== HOW TO QUALIFY ===== -->
+<section class="section qualify" data-screen-label="How to Qualify">
+  <div class="wrap">
+    <h2 class="section__title section__title--narrow mb-14">How to Qualify for The Film Levant Authority System</h2>
+    <p class="qualify__lede">Because this system is built around your business, your audience, and your personal strengths, we only take a limited number of clients at a time to keep the work fully customized.</p>
+    <div class="qualify__grid" id="qualify-list"></div>
+    <div class="tc mt-44"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== TWO PATHS ===== -->
+<section class="section paths" data-screen-label="Two Paths">
+  <div class="wrap">
+    <h2 class="section__title section__title--narrow mb-8">We've Removed Every Hurdle in Your Path to Authority</h2>
+    <p class="paths__lede">You have two paths ahead of you now</p>
+    <div class="paths__grid">
+      <div class="paths__card paths__card--a">
+        <h3 class="paths__heading paths__heading--a">Path 1: Continue Your Current Approach</h3>
+        <p class="paths__intro paths__intro--a">You keep trying to figure out content on your own, posting inconsistently, and hoping something eventually works</p>
+        <div class="paths__timeline" id="path-a"></div>
+      </div>
+      <div class="paths__card paths__card--b">
+        <h3 class="paths__heading paths__heading--b">Path 2: Partner With Film Levant</h3>
+        <p class="paths__intro paths__intro--b">You invest in a proven system that handles everything—strategy, filming, editing, and publishing—while you focus on your business.</p>
+        <div class="paths__timeline" id="path-b"></div>
+      </div>
+    </div>
+    <p class="paths__closer">This is the only path designed around professional execution, strategic positioning, and proven authority-building frameworks.</p>
+    <div class="tc mt-32"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="section final-cta" data-screen-label="Final CTA">
+  <div class="wrap final-cta__inner">
+    <h2 class="final-cta__title">Ready to Transform Your <em class="accent-em">Authority?</em></h2>
+    <p class="final-cta__lede">Book your strategy call now and discover how The Film Levant Authority System can help you become the recognized expert in your industry.</p>
+    <a href="#book-a-call" class="btn btn--xl">Book Your Strategy Call<span class="dot dot--md"></span></a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <span class="logo logo--footer">Film&nbsp;Lev<span class="accent">ant</span></span>
+    <span class="site-footer__copy">© 2026 Film Levant. All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- ===== BOOKING MODAL ===== -->
+<div class="modal" id="booking-modal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <button class="modal__close" type="button" data-close aria-label="Close">&times;</button>
+    <div class="modal__head">
+      <div class="eyebrow eyebrow--left">Book Your Strategy Call</div>
+      <h2 id="booking-title" class="modal__title">Let's map your path to authority</h2>
+      <p class="modal__sub">Tell us where to reach you and we'll set up your free strategy call.</p>
+    </div>
+    <form id="opt-in-form" name="Opt-in Form" novalidate>
+      <div class="field">
+        <label for="f-first">First name</label>
+        <input id="f-first" name="firstName" type="text" autocomplete="given-name" placeholder="Jane">
+      </div>
+      <div class="field">
+        <label for="f-phone">Phone</label>
+        <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone number">
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" placeholder="jane@example.com">
+      </div>
+      <div class="field">
+        <label for="f-ig">Instagram handle</label>
+        <input id="f-ig" name="instagram" type="text" placeholder="@yourhandle">
+      </div>
+      <div class="field">
+        <span class="field__label">What best describes you?</span>
+        <div class="chips" id="chips-describes" role="group" aria-label="What best describes you?">
+          <button type="button" class="chip" data-value="Doctor">Doctor</button>
+          <button type="button" class="chip" data-value="Coach">Coach</button>
+          <button type="button" class="chip" data-value="Consultant">Consultant</button>
+          <button type="button" class="chip" data-value="Agency Owner">Agency Owner</button>
+          <button type="button" class="chip" data-value="Other Professional">Other Professional</button>
+        </div>
+      </div>
+      <div class="form-error" id="form-error" hidden></div>
+      <button type="submit" class="btn btn--lg form-submit">Book My Strategy Call<span class="dot dot--md"></span></button>
+      <p class="form-note">We'll never share your details. By submitting you agree to be contacted about your strategy call.</p>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

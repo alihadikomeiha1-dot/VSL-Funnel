@@ -123,18 +123,16 @@ set('compare-new', compare.map((c) => `
   <div class="compare__row compare__row--new"><span class="compare__icon compare__icon--new">✓</span><span>${esc(c.ours)}</span></div>`).join(''));
 
 set('video-list', videos.map((v) => `
-  <div class="testimonial">
-    <div class="testimonial__video" data-placeholder="testimonial-video">
-      <div class="testimonial__video-center">
-        <div class="play-btn play-btn--sm"><span class="play-btn__triangle play-btn__triangle--sm"></span></div>
-      </div>
-      <div class="sound-pill sound-pill--sm"><span class="dot dot--sm"></span>Enable sound</div>
+  <article class="vcard">
+    <div class="vcard__thumb" data-placeholder="testimonial-video">
+      <div class="play-btn play-btn--sm"><span class="play-btn__triangle play-btn__triangle--sm"></span></div>
     </div>
-    <div>
-      <div class="testimonial__name">${esc(v.name)}</div>
-      <div class="testimonial__result">${esc(v.result)}</div>
+    <div class="vcard__body">
+      <div class="vcard__stars" aria-label="Rated 5 out of 5">★★★★★</div>
+      <div class="vcard__name">${esc(v.name)}</div>
+      <div class="vcard__result">${esc(v.result)}</div>
     </div>
-  </div>`).join(''));
+  </article>`).join(''));
 
 set('stats-list', aliStats.map((s) => `
   <div class="stat"><div class="stat__value">${esc(s.value)}</div><div class="stat__label">${esc(s.label)}</div></div>`).join(''));

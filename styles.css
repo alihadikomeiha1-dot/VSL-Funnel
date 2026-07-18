@@ -189,16 +189,25 @@ a{text-decoration:none}
 
 /* ===== Video testimonials ===== */
 .testimonials .wrap{padding-top:72px;padding-bottom:72px}
-.testimonials__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
-.testimonial{display:flex;flex-direction:column;gap:11px}
-.testimonial__video{
-  aspect-ratio:9/16;border-radius:12px;
-  background:repeating-linear-gradient(135deg,#e6ded6 0 12px,#efe8e1 12px 24px);
-  box-shadow:0 6px 16px rgba(5,5,5,.08);
+/* horizontal (landscape) video testimonial cards — 3 per row */
+.testimonials__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.vcard{
+  display:flex;gap:16px;align-items:center;padding:16px;
+  background:var(--card);border:1px solid rgba(5,5,5,.08);border-radius:16px;
+  box-shadow:0 8px 20px rgba(5,5,5,.06);
+  transition:transform .25s ease, box-shadow .25s ease;
 }
-.testimonial__video-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.testimonial__name{font:600 15px/1.15 var(--serif)}
-.testimonial__result{margin-top:2px;font:400 10.5px/1.4 var(--sans);color:rgba(5,5,5,.55)}
+.vcard:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(5,5,5,.12)}
+.vcard__thumb{
+  flex:none;width:104px;aspect-ratio:1/1;border-radius:12px;position:relative;overflow:hidden;
+  border:1px solid rgba(5,5,5,.1);
+  background:repeating-linear-gradient(135deg,#e6ded6 0 12px,#efe8e1 12px 24px);
+  display:flex;align-items:center;justify-content:center;
+}
+.vcard__body{min-width:0}
+.vcard__stars{color:var(--accent);font-size:13px;letter-spacing:2px;margin-bottom:5px}
+.vcard__name{font:600 16px/1.2 var(--serif)}
+.vcard__result{margin-top:2px;font:400 12.5px/1.45 var(--sans);color:rgba(5,5,5,.6)}
 
 /* ===== Founder ===== */
 .founder__inner{max-width:1080px;padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:0.85fr 1.15fr;gap:52px;align-items:center}
@@ -358,7 +367,7 @@ a{text-decoration:none}
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px){
-  .testimonials__grid{grid-template-columns:repeat(3,1fr)}
+  .testimonials__grid{grid-template-columns:repeat(2,1fr)}
   .steps__grid{grid-template-columns:repeat(2,1fr)}
   .written__masonry{columns:2}
 }
@@ -375,7 +384,7 @@ a{text-decoration:none}
   .system__title{font-size:34px}
   .founder__name{font-size:36px}
   .final-cta__title{font-size:36px}
-  .testimonials__grid{grid-template-columns:repeat(2,1fr)}
+  .testimonials__grid{grid-template-columns:1fr}
   .steps__grid{grid-template-columns:1fr}
   .written__masonry{columns:1}
   .stats{grid-template-columns:repeat(2,1fr)}

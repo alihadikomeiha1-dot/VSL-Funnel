@@ -23,7 +23,7 @@ window.SITE = {
   },
 
   // Premium VSL section video — paste a YouTube/Vimeo URL or ID (leave "" for the placeholder).
-  vslEmbed: "",
+  vslEmbed: "https://youtu.be/DdBf0Yad6I4",
 
   // After the opt-in form submits, send the lead to the survey.
   surveyUrl: "survey.html",

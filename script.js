@@ -5,13 +5,13 @@
 // ============================================================
 
 const written = [
-  { name: 'Dr. Sarah Mitchell', role: 'Cosmetic Dentist', quote: '"I was spending hours trying to figure out what content to post. Film Levant gave me a complete system. Now I have 22 reels monthly and my patient inquiries tripled in 3 months."' },
-  { name: 'Michael Chen', role: 'Business Coach', quote: '"My content was getting zero engagement. After working with Ali, my profile became a client-generating machine. The strategy, filming, and editing are all handled. I just show up."' },
-  { name: 'Dr. James Rodriguez', role: 'Orthopedic Surgeon', quote: '"I thought I didn\'t have time for content. Film Levant made it effortless. Professional filming, strategic content, and my authority in the market has skyrocketed."' },
-  { name: 'Lisa Thompson', role: 'Financial Advisor', quote: '"I was invisible in my industry. Now I\'m seen as the go-to expert. The content system works, and I finally have predictable lead flow from Instagram."' },
-  { name: 'David Park', role: 'Marketing Consultant', quote: '"I tried doing content myself for 2 years with mediocre results. In 4 months with Film Levant, I\'ve generated more clients than the previous 2 years combined."' },
-  { name: 'Dr. Amanda Foster', role: 'Dermatologist', quote: '"The professionalism and strategy behind every piece of content is what sets Film Levant apart. My patients now find me online before I even advertise."' },
-  { name: 'Robert Williams', role: 'Executive Coach', quote: '"I was skeptical about investing in content production. But after seeing competitors dominate with video, I knew I needed help. Film Levant didn\'t just film content—they transformed my entire positioning. My profile went from amateur to authority. I went from chasing clients to having them reach out to me. The ROI has been 10x what I invested."' },
+  { name: 'Dr. Sarah Mitchell', role: 'Cosmetic Dentist', country: 'United States', flag: '🇺🇸', quote: '"I was spending hours trying to figure out what content to post. Film Levant gave me a complete system. Now I have 22 reels monthly and my patient inquiries tripled in 3 months."' },
+  { name: 'Michael Chen', role: 'Business Coach', country: 'Canada', flag: '🇨🇦', quote: '"My content was getting zero engagement. After working with Ali, my profile became a client-generating machine. The strategy, filming, and editing are all handled. I just show up."' },
+  { name: 'Dr. James Rodriguez', role: 'Orthopedic Surgeon', country: 'United States', flag: '🇺🇸', quote: '"I thought I didn\'t have time for content. Film Levant made it effortless. Professional filming, strategic content, and my authority in the market has skyrocketed."' },
+  { name: 'Lisa Thompson', role: 'Financial Advisor', country: 'United Kingdom', flag: '🇬🇧', quote: '"I was invisible in my industry. Now I\'m seen as the go-to expert. The content system works, and I finally have predictable lead flow from Instagram."' },
+  { name: 'David Park', role: 'Marketing Consultant', country: 'United States', flag: '🇺🇸', quote: '"I tried doing content myself for 2 years with mediocre results. In 4 months with Film Levant, I\'ve generated more clients than the previous 2 years combined."' },
+  { name: 'Dr. Amanda Foster', role: 'Dermatologist', country: 'Australia', flag: '🇦🇺', quote: '"The professionalism and strategy behind every piece of content is what sets Film Levant apart. My patients now find me online before I even advertise."' },
+  { name: 'Robert Williams', role: 'Executive Coach', country: 'United States', flag: '🇺🇸', quote: '"I was skeptical about investing in content production. But after seeing competitors dominate with video, I knew I needed help. Film Levant didn\'t just film content—they transformed my entire positioning. My profile went from amateur to authority. I went from chasing clients to having them reach out to me. The ROI has been 10x what I invested."' },
 ];
 
 const problems = [
@@ -89,17 +89,21 @@ const pathB = [
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
 
+const initials = (n) => n.replace(/^(Dr\.?|Mr\.?|Mrs\.?|Ms\.?)\s+/i, '').trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+
 set('written-list', written.map((w) => `
-  <div class="written__card">
-    <div class="written__head">
-      <div class="written__avatar" data-placeholder="avatar"></div>
-      <div>
-        <div class="written__name">${esc(w.name)}</div>
-        <div class="written__role">${esc(w.role)}</div>
+  <article class="tcard">
+    <div class="tcard__photo" data-placeholder="client-photo" aria-hidden="true">${esc(initials(w.name))}</div>
+    <div class="tcard__body">
+      <div class="tcard__stars" aria-label="Rated 5 out of 5">★★★★★</div>
+      <p class="tcard__quote">${esc(w.quote)}</p>
+      <div class="tcard__meta">
+        <div class="tcard__name">${esc(w.name)}</div>
+        <div class="tcard__role">${esc(w.role)}</div>
       </div>
+      <span class="tcard__country">${w.flag} ${esc(w.country)}</span>
     </div>
-    <p class="written__quote">${esc(w.quote)}</p>
-  </div>`).join(''));
+  </article>`).join(''));
 
 set('problem-list', problems.map((p) => `
   <div class="problem__card">
@@ -311,4 +315,119 @@ set('path-b', pathB.map((m) => `
       go();
     }
   });
+})();
+
+// ============================================================
+// Premium testimonials carousel (arrows + dots + native swipe)
+//  - card-accurate paging: dots = ceil(cards / cardsPerView)
+// ============================================================
+(function () {
+  const track = document.getElementById('written-list');
+  const carousel = track && track.closest('.tp-carousel');
+  const dotsWrap = document.getElementById('tp-dots');
+  if (!track || !carousel || !dotsWrap) return;
+  const prev = carousel.querySelector('.tp-arrow--prev');
+  const next = carousel.querySelector('.tp-arrow--next');
+
+  function metrics() {
+    const cards = track.querySelectorAll('.tcard');
+    const cardW = cards.length ? cards[0].getBoundingClientRect().width : track.clientWidth;
+    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+    const perView = Math.max(1, Math.round((track.clientWidth + gap) / (cardW + gap)));
+    const pages = Math.max(1, Math.ceil(cards.length / perView));
+    const step = perView * (cardW + gap);
+    const max = track.scrollWidth - track.clientWidth;
+    return { perView, pages, step, max };
+  }
+
+  function buildDots() {
+    const { pages, step, max } = metrics();
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < pages; i++) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tp-dot';
+      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      b.addEventListener('click', () => track.scrollTo({ left: Math.min(i * step, max), behavior: 'smooth' }));
+      dotsWrap.appendChild(b);
+    }
+    dotsWrap.style.display = pages > 1 ? '' : 'none';
+    update();
+  }
+  function update() {
+    const { pages, step, max } = metrics();
+    let cur = track.scrollLeft >= max - 4 ? pages - 1 : Math.min(pages - 1, Math.round(track.scrollLeft / step));
+    [...dotsWrap.children].forEach((d, i) => d.classList.toggle('is-active', i === cur));
+    if (prev) prev.disabled = track.scrollLeft < 4;
+    if (next) next.disabled = track.scrollLeft >= max - 4;
+  }
+  if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -metrics().step, behavior: 'smooth' }));
+  if (next) next.addEventListener('click', () => track.scrollBy({ left: metrics().step, behavior: 'smooth' }));
+
+  let st;
+  track.addEventListener('scroll', () => { clearTimeout(st); st = setTimeout(update, 60); }, { passive: true });
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(buildDots, 150); });
+
+  buildDots();
+  setTimeout(buildDots, 500); // re-measure after web fonts settle
+})();
+
+// ============================================================
+// Smooth reveal-on-scroll (safe: content stays visible if JS/IO absent)
+// ============================================================
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const reveal = (el) => el.classList.remove('reveal--pre');
+  const inView = (el) => { const r = el.getBoundingClientRect(); return r.top < innerHeight * 0.92 && r.bottom > 0; };
+  els.forEach((el) => el.classList.add('reveal--pre'));
+  // reveal anything already on screen right away (no wait)
+  els.forEach((el) => { if (inView(el)) reveal(el); });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (en.isIntersecting) { reveal(en.target); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  els.forEach((el) => { if (el.classList.contains('reveal--pre')) io.observe(el); });
+  // failsafe: never leave content hidden if the observer never fires
+  setTimeout(() => els.forEach(reveal), 3000);
+})();
+
+// ============================================================
+// Premium VSL player — click-to-load YouTube/Vimeo facade
+// ============================================================
+(function () {
+  const player = document.querySelector('.vsl-player');
+  if (!player) return;
+  const btn = player.querySelector('.vsl-player__btn');
+  const hint = player.querySelector('.vsl-player__hint');
+  const raw = (window.SITE && window.SITE.vslEmbed) || '';
+  const src = toEmbedUrl(raw);
+  if (src && hint) hint.style.display = 'none';
+  if (!btn) return;
+  player.addEventListener('click', () => {
+    if (!src) { player.classList.add('vsl-player--empty'); return; }
+    const frame = document.createElement('div');
+    frame.className = 'vsl-player__frame';
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Film Levant — Watch How We Build Industry Authority';
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('allowfullscreen', '');
+    frame.appendChild(iframe);
+    player.innerHTML = '';
+    player.appendChild(frame);
+  });
+
+  function toEmbedUrl(v) {
+    v = String(v || '').trim();
+    if (!v) return '';
+    if (/youtube\.com\/embed\/|player\.vimeo\.com\/video\//.test(v)) return v + (v.includes('?') ? '&' : '?') + 'autoplay=1';
+    let m;
+    if ((m = v.match(/(?:youtu\.be\/|[?&]v=|youtube\.com\/shorts\/)([\w-]{11})/))) return 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&rel=0';
+    if (/^[\w-]{11}$/.test(v)) return 'https://www.youtube.com/embed/' + v + '?autoplay=1&rel=0';
+    if ((m = v.match(/vimeo\.com\/(?:video\/)?(\d+)/))) return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1';
+    if (/^\d+$/.test(v)) return 'https://player.vimeo.com/video/' + v + '?autoplay=1';
+    return '';
+  }
 })();

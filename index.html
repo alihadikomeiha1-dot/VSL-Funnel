@@ -72,12 +72,35 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
   </div>
 </section>
 
-<!-- ===== WRITTEN (TEXT) TESTIMONIALS ===== -->
-<section class="section written" data-screen-label="Experts We've Helped">
+<!-- ===== PREMIUM VSL SECTION (below hero) ===== -->
+<section class="section vsl-section" data-screen-label="VSL">
+  <div class="wrap vsl-section__inner reveal">
+    <div class="eyebrow">Behind The System</div>
+    <h2 class="vsl-section__title">Watch How We Build Industry Authority</h2>
+    <p class="vsl-section__desc">A look inside the done-with-you content system that turns overlooked experts into the recognized name in their field — filming, strategy, and execution handled end to end.</p>
+    <div class="vsl-player" data-screen-label="VSL Player">
+      <div class="vsl-player__poster">
+        <button class="vsl-player__btn" type="button" aria-label="Play video"><span class="vsl-player__tri"></span></button>
+        <span class="vsl-player__hint">— add your video in config.js (vslEmbed) —</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PREMIUM TEXT TESTIMONIALS (carousel) ===== -->
+<section class="section tp-section" data-screen-label="Experts We've Helped">
   <div class="wrap">
-    <h2 class="section__title written__title">Experts We've Helped to Scale</h2>
-    <div class="written__masonry" id="written-list"></div>
-    <div class="tc mt-26"><a href="#book-a-call" class="btn btn--md">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
+    <div class="tp__head reveal">
+      <h2 class="tp__title">Experts We've Helped to Scale</h2>
+      <p class="tp__sub">Real results from the doctors, coaches, and founders who switched to Film Levant.</p>
+    </div>
+    <div class="tp-carousel reveal">
+      <button class="tp-arrow tp-arrow--prev" type="button" aria-label="Previous testimonials">&#8249;</button>
+      <div class="tp-track" id="written-list"></div>
+      <button class="tp-arrow tp-arrow--next" type="button" aria-label="Next testimonials">&#8250;</button>
+    </div>
+    <div class="tp-dots" id="tp-dots" aria-label="Testimonial slides"></div>
+    <div class="tc mt-26"><a href="#book-a-call" class="btn btn--md btn--accent">Book Your Strategy Call<span class="dot dot--sm"></span></a></div>
   </div>
 </section>
 

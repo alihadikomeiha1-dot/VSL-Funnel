@@ -43,7 +43,7 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
   .eyebrow{font:500 11px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
   h1{margin:0 0 12px;font:600 40px/1.08 var(--serif);letter-spacing:-.015em}
   .sub{margin:0 auto;max-width:460px;font:400 15.5px/1.6 var(--sans);color:rgba(5,5,5,.64)}
-  .embed{background:#fff;border:1px solid rgba(5,5,5,.08);border-radius:16px;box-shadow:0 12px 30px rgba(5,5,5,.08);padding:8px;overflow:hidden}
+  .embed{background:transparent;border:none;border-radius:0;box-shadow:none;padding:0;overflow:hidden}
   iframe{display:block;width:100%;min-height:640px;border:none}
   @media(max-width:640px){h1{font-size:30px}main{padding:32px 16px 48px}}
 </style>
@@ -63,7 +63,7 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
       <p class="sub">Answer these so we can make sure your strategy call is worth your time — it takes under a minute.</p>
     </div>
     <div class="embed">
-      <iframe id="e6NH1jrULV36sj4erxc3" title="survey" scrolling="no" src="about:blank"></iframe>
+      <iframe id="vC6IKIfNU6nE2CupuatI" title="survey" scrolling="no" src="about:blank"></iframe>
     </div>
   </main>
 
@@ -74,26 +74,24 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
       first_name: (p.get('first_name') || '').trim(),
       email: (p.get('email') || '').trim(),
       phone: (p.get('phone') || '').trim(),
-      instagram: (p.get('instagram') || '').trim(),
-      describes: (p.get('describes') || '').trim()
+      instagram: (p.get('instagram') || '').trim()
     };
     // stash for the calendar page (sticky contact carry-over)
     try { localStorage.setItem('fl_lead', JSON.stringify(lead)); } catch (e) {}
 
     // Prefill the Agenci survey. Standard fields work out of the box.
-    // To ALSO prefill Instagram + "What best describes you", paste the two
-    // custom-field "Query Keys" from Agenci (Settings → Custom Fields) below:
-    var CUSTOM_KEYS = { instagram: 'contact.your_instagram_account', describes: 'contact.what_best_describes_you' };
+    // Instagram is a custom field — key from Agenci (Settings → Custom Fields).
+    // "What best describes you" is asked inside the survey, so it's not prefilled.
+    var CUSTOM_KEYS = { instagram: 'contact.your_instagram_account' };
 
     var qp = new URLSearchParams();
     if (lead.first_name) qp.set('first_name', lead.first_name);
     if (lead.email) qp.set('email', lead.email);
     if (lead.phone) qp.set('phone', lead.phone);
     if (CUSTOM_KEYS.instagram && lead.instagram) qp.set(CUSTOM_KEYS.instagram, lead.instagram);
-    if (CUSTOM_KEYS.describes && lead.describes) qp.set(CUSTOM_KEYS.describes, lead.describes);
 
-    var base = 'https://api.filmlevant.com/widget/survey/e6NH1jrULV36sj4erxc3';
-    document.getElementById('e6NH1jrULV36sj4erxc3').src = base + (qp.toString() ? ('?' + qp.toString()) : '');
+    var base = 'https://api.filmlevant.com/widget/survey/vC6IKIfNU6nE2CupuatI';
+    document.getElementById('vC6IKIfNU6nE2CupuatI').src = base + (qp.toString() ? ('?' + qp.toString()) : '');
   })();
   </script>
   <script src="https://api.filmlevant.com/js/form_embed.js"></script>

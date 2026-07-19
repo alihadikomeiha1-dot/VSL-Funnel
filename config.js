@@ -25,11 +25,11 @@ window.SITE = {
   // Premium VSL section video — paste a YouTube/Vimeo URL or ID (leave "" for the placeholder).
   vslEmbed: "https://youtu.be/DdBf0Yad6I4",
 
-  // After the opt-in form submits, send the lead to the survey.
-  surveyUrl: "survey.html",
+  // After the opt-in form submits, send the lead to the apply/survey page.
+  surveyUrl: "apply",
 
   // Post-booking confirmation page (Agenci calendar redirects here after booking).
-  thankYouUrl: "thank-you.html"
+  thankYouUrl: "thank-you"
 };
 
 window.dataLayer = window.dataLayer || [];

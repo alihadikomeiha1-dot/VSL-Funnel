@@ -151,7 +151,7 @@ set('path-b', pathB.map((m) => `
 // Booking modal + lead capture
 //  - opens on any "Book Your Strategy Call" CTA (href="#book-a-call")
 //  - validates, POSTs the lead JSON to the Agenci.io webhook,
-//    then redirects to thank-you.html?name=<FirstName>
+//    then redirects to the apply/survey page with the contact prefilled
 //  - fires Meta Pixel + dataLayer conversion events
 // ============================================================
 (function () {
@@ -161,8 +161,7 @@ set('path-b', pathB.map((m) => `
   const form = document.getElementById('opt-in-form');
   const errBox = document.getElementById('form-error');
   const phoneInput = document.getElementById('f-phone');
-  const chipWrap = document.getElementById('chips-describes');
-  let iti = null, selectedDescribes = '';
+  let iti = null;
 
   // intl-tel-input: auto country detect, live formatting, E.164 on submit
   if (window.intlTelInput && phoneInput) {
@@ -198,17 +197,6 @@ set('path-b', pathB.map((m) => `
     if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeBooking();
   });
 
-  // single-select chips
-  if (chipWrap) {
-    chipWrap.addEventListener('click', (e) => {
-      const chip = e.target.closest('.chip');
-      if (!chip) return;
-      chipWrap.querySelectorAll('.chip').forEach((c) => c.classList.remove('is-active'));
-      chip.classList.add('is-active');
-      selectedDescribes = chip.getAttribute('data-value');
-    });
-  }
-
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   form.addEventListener('submit', (e) => {
@@ -233,7 +221,6 @@ set('path-b', pathB.map((m) => `
 
     if (!email || !emailRe.test(email)) missing.push('a valid Email');
     if (!instagram) missing.push('Instagram handle');
-    if (!selectedDescribes) missing.push('What best describes you');
 
     if (missing.length) {
       errBox.hidden = false;
@@ -249,14 +236,13 @@ set('path-b', pathB.map((m) => `
       email,
       phone,
       instagram,
-      describes: selectedDescribes,
       source: 'Landing Page',
       submittedAt: new Date().toISOString(),
       pageUrl: location.href,
     };
 
     // conversion event for GTM triggers
-    (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', lead_type: selectedDescribes });
+    (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead' });
 
     const btn = form.querySelector('.form-submit');
     if (btn) { btn.disabled = true; btn.textContent = 'Booking…'; }
@@ -265,15 +251,14 @@ set('path-b', pathB.map((m) => `
     const go = () => {
       if (navigated) return;
       navigated = true;
-      // hand the lead to the survey as URL params → survey/calendar prefill (sticky contact)
+      // hand the lead to the apply page as URL params → survey/calendar prefill (sticky contact)
       const q = new URLSearchParams({
         first_name: firstName,
         email: email,
         phone: phone,
         instagram: instagram,
-        describes: selectedDescribes,
       });
-      location.href = (SITE.surveyUrl || 'survey.html') + '?' + q.toString();
+      location.href = (SITE.surveyUrl || 'apply') + '?' + q.toString();
     };
 
     // POST to Agenci.io — never let a slow/failed webhook block the booking

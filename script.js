@@ -4,16 +4,6 @@
 // Feature/copy text is final; the images/videos are placeholders.
 // ============================================================
 
-const written = [
-  { name: 'Dr. Sarah Mitchell', role: 'Cosmetic Dentist', country: 'United States', flag: '🇺🇸', quote: '"I was spending hours trying to figure out what content to post. Film Levant gave me a complete system. Now I have 22 reels monthly and my patient inquiries tripled in 3 months."' },
-  { name: 'Michael Chen', role: 'Business Coach', country: 'Canada', flag: '🇨🇦', quote: '"My content was getting zero engagement. After working with Ali, my profile became a client-generating machine. The strategy, filming, and editing are all handled. I just show up."' },
-  { name: 'Dr. James Rodriguez', role: 'Orthopedic Surgeon', country: 'United States', flag: '🇺🇸', quote: '"I thought I didn\'t have time for content. Film Levant made it effortless. Professional filming, strategic content, and my authority in the market has skyrocketed."' },
-  { name: 'Lisa Thompson', role: 'Financial Advisor', country: 'United Kingdom', flag: '🇬🇧', quote: '"I was invisible in my industry. Now I\'m seen as the go-to expert. The content system works, and I finally have predictable lead flow from Instagram."' },
-  { name: 'David Park', role: 'Marketing Consultant', country: 'United States', flag: '🇺🇸', quote: '"I tried doing content myself for 2 years with mediocre results. In 4 months with Film Levant, I\'ve generated more clients than the previous 2 years combined."' },
-  { name: 'Dr. Amanda Foster', role: 'Dermatologist', country: 'Australia', flag: '🇦🇺', quote: '"The professionalism and strategy behind every piece of content is what sets Film Levant apart. My patients now find me online before I even advertise."' },
-  { name: 'Robert Williams', role: 'Executive Coach', country: 'United States', flag: '🇺🇸', quote: '"I was skeptical about investing in content production. But after seeing competitors dominate with video, I knew I needed help. Film Levant didn\'t just film content—they transformed my entire positioning. My profile went from amateur to authority. I went from chasing clients to having them reach out to me. The ROI has been 10x what I invested."' },
-];
-
 const problems = [
   { title: "You're Posting But Nobody's Watching", body: "You create content consistently, but your reach is declining, engagement is non-existent, and you're not getting any client inquiries.", bullets: ['Your Content looks amateur compared to competitions', 'You have no clear strategy or messaging', "You're wasting hours filming with zero ROI"] },
   { title: 'Your Competitors Are Winning', body: "Less skilled professionals are stealing your clients simply because they're more visible online. You know you're better, but nobody sees you.", bullets: ['They dominate search results and social feeds', "They're perceived as the authority in your niche", 'Clients choose them first because of their content'] },
@@ -90,22 +80,6 @@ const pathB = [
 // ============================================================
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
-
-const initials = (n) => n.replace(/^(Dr\.?|Mr\.?|Mrs\.?|Ms\.?)\s+/i, '').trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join('').toUpperCase();
-
-set('written-list', written.map((w) => `
-  <article class="tcard">
-    <div class="tcard__photo" data-placeholder="client-photo" aria-hidden="true">${esc(initials(w.name))}</div>
-    <div class="tcard__body">
-      <div class="tcard__stars" aria-label="Rated 5 out of 5">★★★★★</div>
-      <p class="tcard__quote">${esc(w.quote)}</p>
-      <div class="tcard__meta">
-        <div class="tcard__name">${esc(w.name)}</div>
-        <div class="tcard__role">${esc(w.role)}</div>
-      </div>
-      <span class="tcard__country">${w.flag} ${esc(w.country)}</span>
-    </div>
-  </article>`).join(''));
 
 set('problem-list', problems.map((p) => `
   <div class="problem__card">
@@ -318,62 +292,6 @@ set('path-b', pathB.map((m) => `
       go();
     }
   });
-})();
-
-// ============================================================
-// Premium testimonials carousel (arrows + dots + native swipe)
-//  - card-accurate paging: dots = ceil(cards / cardsPerView)
-// ============================================================
-(function () {
-  const track = document.getElementById('written-list');
-  const carousel = track && track.closest('.tp-carousel');
-  const dotsWrap = document.getElementById('tp-dots');
-  if (!track || !carousel || !dotsWrap) return;
-  const prev = carousel.querySelector('.tp-arrow--prev');
-  const next = carousel.querySelector('.tp-arrow--next');
-
-  function metrics() {
-    const cards = track.querySelectorAll('.tcard');
-    const cardW = cards.length ? cards[0].getBoundingClientRect().width : track.clientWidth;
-    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
-    const perView = Math.max(1, Math.round((track.clientWidth + gap) / (cardW + gap)));
-    const pages = Math.max(1, Math.ceil(cards.length / perView));
-    const step = perView * (cardW + gap);
-    const max = track.scrollWidth - track.clientWidth;
-    return { perView, pages, step, max };
-  }
-
-  function buildDots() {
-    const { pages, step, max } = metrics();
-    dotsWrap.innerHTML = '';
-    for (let i = 0; i < pages; i++) {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'tp-dot';
-      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      b.addEventListener('click', () => track.scrollTo({ left: Math.min(i * step, max), behavior: 'smooth' }));
-      dotsWrap.appendChild(b);
-    }
-    dotsWrap.style.display = pages > 1 ? '' : 'none';
-    update();
-  }
-  function update() {
-    const { pages, step, max } = metrics();
-    let cur = track.scrollLeft >= max - 4 ? pages - 1 : Math.min(pages - 1, Math.round(track.scrollLeft / step));
-    [...dotsWrap.children].forEach((d, i) => d.classList.toggle('is-active', i === cur));
-    if (prev) prev.disabled = track.scrollLeft < 4;
-    if (next) next.disabled = track.scrollLeft >= max - 4;
-  }
-  if (prev) prev.addEventListener('click', () => track.scrollBy({ left: -metrics().step, behavior: 'smooth' }));
-  if (next) next.addEventListener('click', () => track.scrollBy({ left: metrics().step, behavior: 'smooth' }));
-
-  let st;
-  track.addEventListener('scroll', () => { clearTimeout(st); st = setTimeout(update, 60); }, { passive: true });
-  let rt;
-  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(buildDots, 150); });
-
-  buildDots();
-  setTimeout(buildDots, 500); // re-measure after web fonts settle
 })();
 
 // ============================================================

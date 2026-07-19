@@ -18,7 +18,7 @@ window.SITE = {
   // Agenci.io External Tracking — copy the src + tracking id from
   // Agenci.io → Settings → Business Profile → External Tracking  (Phase 4)
   agenciTracking: {
-    src: "https://filmlevant.com/js/external-tracking.js",
+    src: "https://api.filmlevant.com/js/external-tracking.js",
     id: "tk_0393281de65a409088ca0a78c8be38ae"
   },
 

@@ -22,8 +22,8 @@ window.SITE = {
     id: "tk_0393281de65a409088ca0a78c8be38ae"
   },
 
-  // After the opt-in form submits, send the lead to the survey.
-  surveyUrl: "survey",
+  // After the opt-in form submits, send the lead to the apply/survey page.
+  surveyUrl: "apply",
 
   // Post-booking confirmation page (Agenci calendar redirects here after booking).
   thankYouUrl: "thank-you"

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="config.js"></script>
+<!-- Google Tag Manager -->
+<script>(function(){if(!window.GTM_ID)return;(function(w,d,s,l,i){w[l]=w[l]||[];
+w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',window.GTM_ID);})();</script>
+<!-- Meta Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;
+n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+if(window.SITE&&window.SITE.pixelId){fbq('init',window.SITE.pixelId);fbq('track','PageView');}</script>
+<!-- Agenci.io External Tracking -->
+<script>(function(){var t=window.SITE&&window.SITE.agenciTracking;if(!t||!t.id)return;
+var s=document.createElement('script');s.async=true;s.src=t.src;
+s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</script>
+
+<title>A few quick questions — Film Levant</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23050505'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='54' font-weight='700' fill='%23F3EEEA' text-anchor='middle'%3EF%3C/text%3E%3Ccircle cx='72' cy='30' r='7' fill='%23B82A2A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500;1,6..72,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F3EEEA;--ink:#050505;--accent:#B82A2A;--serif:'Newsreader',serif;--sans:'Space Grotesk',sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100dvh;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--accent);color:#fff}
+  .accent{color:var(--accent)}
+  .brand-bar{border-bottom:1px solid rgba(5,5,5,.08);background:rgba(243,238,234,.9);position:sticky;top:0;z-index:5;backdrop-filter:blur(8px)}
+  .brand-bar__inner{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font:600 22px/1 var(--serif);letter-spacing:.02em}
+  .steplabel{font:500 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(5,5,5,.45)}
+  main{max-width:760px;margin:0 auto;padding:48px 24px 64px}
+  .intro{text-align:center;margin-bottom:28px}
+  .eyebrow{font:500 11px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  h1{margin:0 0 12px;font:600 40px/1.08 var(--serif);letter-spacing:-.015em}
+  .sub{margin:0 auto;max-width:460px;font:400 15.5px/1.6 var(--sans);color:rgba(5,5,5,.64)}
+  .embed{background:#fff;border:1px solid rgba(5,5,5,.08);border-radius:16px;box-shadow:0 12px 30px rgba(5,5,5,.08);padding:8px;overflow:hidden}
+  iframe{display:block;width:100%;min-height:640px;border:none}
+  @media(max-width:640px){h1{font-size:30px}main{padding:32px 16px 48px}}
+</style>
+</head>
+<body>
+  <header class="brand-bar">
+    <div class="brand-bar__inner">
+      <span class="logo">Film&nbsp;Lev<span class="accent">ant</span></span>
+      <span class="steplabel">Step 1 of 2</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <div class="eyebrow">Almost there</div>
+      <h1>A few quick questions</h1>
+      <p class="sub">Answer these so we can make sure your strategy call is worth your time — it takes under a minute.</p>
+    </div>
+    <div class="embed">
+      <iframe id="e6NH1jrULV36sj4erxc3" title="survey" scrolling="no" src="about:blank"></iframe>
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    var p = new URLSearchParams(location.search);
+    var lead = {
+      first_name: (p.get('first_name') || '').trim(),
+      email: (p.get('email') || '').trim(),
+      phone: (p.get('phone') || '').trim(),
+      instagram: (p.get('instagram') || '').trim(),
+      describes: (p.get('describes') || '').trim()
+    };
+    // stash for the calendar page (sticky contact carry-over)
+    try { localStorage.setItem('fl_lead', JSON.stringify(lead)); } catch (e) {}
+
+    // Prefill the Agenci survey. Standard fields work out of the box.
+    // To ALSO prefill Instagram + "What best describes you", paste the two
+    // custom-field "Query Keys" from Agenci (Settings → Custom Fields) below:
+    var CUSTOM_KEYS = { instagram: 'contact.your_instagram_account', describes: 'contact.what_best_describes_you' };
+
+    var qp = new URLSearchParams();
+    if (lead.first_name) qp.set('first_name', lead.first_name);
+    if (lead.email) qp.set('email', lead.email);
+    if (lead.phone) qp.set('phone', lead.phone);
+    if (CUSTOM_KEYS.instagram && lead.instagram) qp.set(CUSTOM_KEYS.instagram, lead.instagram);
+    if (CUSTOM_KEYS.describes && lead.describes) qp.set(CUSTOM_KEYS.describes, lead.describes);
+
+    var base = 'https://filmlevant.com/widget/survey/e6NH1jrULV36sj4erxc3';
+    document.getElementById('e6NH1jrULV36sj4erxc3').src = base + (qp.toString() ? ('?' + qp.toString()) : '');
+  })();
+  </script>
+  <script src="https://filmlevant.com/js/form_embed.js"></script>
+</body>
+</html>

@@ -31,10 +31,10 @@ const videos = [
 ];
 
 const aliStats = [
-  { value: '22', label: 'Reels Filmed Monthly' },
-  { value: '8', label: 'Carousels Monthly' },
-  { value: 'A–Z', label: 'Done-With-You' },
-  { value: 'Dozens', label: 'Experts Scaled' },
+  { value: '10,000+', label: 'Videos Produced' },
+  { value: '150+', label: 'Doctors, Coaches & Consultants Helped' },
+  { value: '1B+', label: 'Views Generated Across Client Accounts' },
+  { value: 'A–Z', label: 'Authority Growth System' },
 ];
 
 const steps = [

@@ -170,7 +170,7 @@ set('path-b', pathB.map((m) => `
 // Booking modal + lead capture
 //  - opens on any "Book Your Strategy Call" CTA (href="#book-a-call")
 //  - validates, POSTs the lead JSON to the Agenci.io webhook,
-//    then redirects to thank-you.html?name=<FirstName>
+//    then redirects to the survey with the contact prefilled
 //  - fires Meta Pixel + dataLayer conversion events
 // ============================================================
 (function () {
@@ -292,7 +292,7 @@ set('path-b', pathB.map((m) => `
         instagram: instagram,
         describes: selectedDescribes,
       });
-      location.href = (SITE.surveyUrl || 'survey.html') + '?' + q.toString();
+      location.href = (SITE.surveyUrl || 'survey') + '?' + q.toString();
     };
 
     // POST to Agenci.io — never let a slow/failed webhook block the booking

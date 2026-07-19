@@ -23,10 +23,10 @@ window.SITE = {
   },
 
   // After the opt-in form submits, send the lead to the survey.
-  surveyUrl: "survey.html",
+  surveyUrl: "survey",
 
   // Post-booking confirmation page (Agenci calendar redirects here after booking).
-  thankYouUrl: "thank-you.html"
+  thankYouUrl: "thank-you"
 };
 
 window.dataLayer = window.dataLayer || [];

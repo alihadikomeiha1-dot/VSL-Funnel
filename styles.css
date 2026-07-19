@@ -434,6 +434,8 @@ a{text-decoration:none}
 .vsl-player--empty .vsl-player__hint{color:var(--accent)}
 .vsl-player__frame{position:absolute;inset:0}
 .vsl-player__frame iframe{width:100%;height:100%;border:0;display:block}
+/* CTA directly below the VSL video — centered, 40px gap, same button styling */
+.vsl-cta{margin-top:40px;text-align:center}
 
 /* ===== Premium testimonials carousel ===== */
 .tp-section .wrap{position:relative;padding-top:86px;padding-bottom:90px}

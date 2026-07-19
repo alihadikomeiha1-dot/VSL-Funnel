@@ -223,7 +223,8 @@ a{text-decoration:none}
 
 /* ===== Founder ===== */
 .founder__inner{max-width:1080px;padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:0.85fr 1.15fr;gap:52px;align-items:center}
-.founder__portrait{aspect-ratio:4/5;border-radius:18px;background:repeating-linear-gradient(135deg,#ded4ca 0 16px,#e6ded6 16px 32px);box-shadow:0 24px 60px rgba(5,5,5,.16);display:flex;align-items:flex-end;padding:16px}
+.founder__portrait{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#e6ded6;box-shadow:0 24px 60px rgba(5,5,5,.16)}
+.founder__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% 50%;display:block}
 .founder__portrait-logo{position:absolute;top:16px;left:16px;font:600 18px/1 var(--serif);letter-spacing:.02em;color:rgba(5,5,5,.6)}
 .founder__portrait-hint{font:500 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.05em;color:rgba(5,5,5,.5)}
 .founder__name{margin:0;font:600 46px/1.04 var(--serif);letter-spacing:-.015em}

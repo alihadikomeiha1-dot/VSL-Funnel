@@ -74,23 +74,21 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
       first_name: (p.get('first_name') || '').trim(),
       email: (p.get('email') || '').trim(),
       phone: (p.get('phone') || '').trim(),
-      instagram: (p.get('instagram') || '').trim(),
-      describes: (p.get('describes') || '').trim()
+      instagram: (p.get('instagram') || '').trim()
     };
     // stash for the calendar page (sticky contact carry-over)
     try { localStorage.setItem('fl_lead', JSON.stringify(lead)); } catch (e) {}
 
     // Prefill the Agenci survey. Standard fields work out of the box.
-    // To ALSO prefill Instagram + "What best describes you", paste the two
-    // custom-field "Query Keys" from Agenci (Settings → Custom Fields) below:
-    var CUSTOM_KEYS = { instagram: 'contact.your_instagram_account', describes: 'contact.what_best_describes_you' };
+    // Instagram is a custom field — key from Agenci (Settings → Custom Fields).
+    // "What best describes you" is asked inside the survey, so it's not prefilled.
+    var CUSTOM_KEYS = { instagram: 'contact.your_instagram_account' };
 
     var qp = new URLSearchParams();
     if (lead.first_name) qp.set('first_name', lead.first_name);
     if (lead.email) qp.set('email', lead.email);
     if (lead.phone) qp.set('phone', lead.phone);
     if (CUSTOM_KEYS.instagram && lead.instagram) qp.set(CUSTOM_KEYS.instagram, lead.instagram);
-    if (CUSTOM_KEYS.describes && lead.describes) qp.set(CUSTOM_KEYS.describes, lead.describes);
 
     var base = 'https://api.filmlevant.com/widget/survey/vC6IKIfNU6nE2CupuatI';
     document.getElementById('vC6IKIfNU6nE2CupuatI').src = base + (qp.toString() ? ('?' + qp.toString()) : '');

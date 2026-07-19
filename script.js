@@ -32,11 +32,13 @@ const compare = [
 ];
 
 const videos = [
-  { name: 'Dr. Emily Watson', result: 'Went from 0 to 50K followers in 6 months' },
-  { name: 'Dr. Emily Watson', result: 'Generated $120K in new clients' },
-  { name: 'Dr. Emily Watson', result: 'Became the #1 authority in her niche' },
+  { id: 'Q2ia-DrBbCk', name: 'Shirine', role: 'Founder of Synthe Label', country: 'Lebanon', flag: '🇱🇧', result: 'Gained 12,000 followers in ~3 months' },
+  { id: 'rxw_T8n-hL8', name: 'Nour El Boubou', role: 'Founder of a Souvenir Brand', country: 'Lebanon', flag: '🇱🇧', result: 'Built a recognizable souvenir brand through Film Levant\'s content system' },
+  { id: 'yOzWALWUTGI', name: 'Mariam Ayach', role: 'PhD in Biochemistry', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 500,000 followers' },
+  { id: 'FeKmsaKkG7o', name: 'Mariam', role: 'Dentist', country: 'Tripoli, Lebanon', flag: '🇱🇧', result: 'Built a stronger personal brand and online presence through strategic content' },
+  { id: 'me_10Nio1g8', name: 'Wafaa', role: 'Pharmacist', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 250,000 followers and built two successful businesses' },
+  { id: 'OTY1BiaYH_I', name: 'Dr. Ali Moghniyeh', role: 'Doctor & Entrepreneur', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to 110,000 followers and built the successful ONAD brand' },
 ];
-while (videos.length < 15) videos.push({ name: 'Client Name', result: 'Their result in one line' });
 
 const aliStats = [
   { value: '22', label: 'Reels Filmed Monthly' },
@@ -123,14 +125,17 @@ set('compare-new', compare.map((c) => `
   <div class="compare__row compare__row--new"><span class="compare__icon compare__icon--new">✓</span><span>${esc(c.ours)}</span></div>`).join(''));
 
 set('video-list', videos.map((v) => `
-  <article class="vcard">
-    <div class="vcard__thumb" data-placeholder="testimonial-video">
-      <div class="play-btn play-btn--sm"><span class="play-btn__triangle play-btn__triangle--sm"></span></div>
+  <article class="vcard" data-video="${v.id}" role="button" tabindex="0" aria-label="Play ${esc(v.name)}'s video testimonial">
+    <div class="vcard__thumb">
+      <img class="vcard__img" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${esc(v.name)} testimonial" loading="lazy">
+      <span class="vcard__play"><span class="play-btn play-btn--sm"><span class="play-btn__triangle play-btn__triangle--sm"></span></span></span>
     </div>
     <div class="vcard__body">
       <div class="vcard__stars" aria-label="Rated 5 out of 5">★★★★★</div>
       <div class="vcard__name">${esc(v.name)}</div>
+      <div class="vcard__role">${esc(v.role)}</div>
       <div class="vcard__result">${esc(v.result)}</div>
+      <span class="vcard__country">${v.flag} ${esc(v.country)}</span>
     </div>
   </article>`).join(''));
 
@@ -428,4 +433,48 @@ set('path-b', pathB.map((m) => `
     if (/^\d+$/.test(v)) return 'https://player.vimeo.com/video/' + v + '?autoplay=1';
     return '';
   }
+})();
+
+// ============================================================
+// Video testimonial lightbox — click a card to play the video
+// ============================================================
+(function () {
+  const grid = document.getElementById('video-list');
+  if (!grid) return;
+  let lb = null;
+
+  function build() {
+    lb = document.createElement('div');
+    lb.className = 'vlb';
+    lb.innerHTML =
+      '<div class="vlb__backdrop" data-vclose></div>' +
+      '<button class="vlb__close" type="button" data-vclose aria-label="Close video">&times;</button>' +
+      '<div class="vlb__frame"></div>';
+    document.body.appendChild(lb);
+    lb.addEventListener('click', (e) => { if (e.target.closest('[data-vclose]')) close(); });
+  }
+  function open(id) {
+    if (!lb) build();
+    lb.querySelector('.vlb__frame').innerHTML =
+      '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="Video testimonial" ' +
+      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    if (!lb) return;
+    lb.classList.remove('is-open');
+    lb.querySelector('.vlb__frame').innerHTML = ''; // stop playback
+    document.body.style.overflow = '';
+  }
+
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.vcard[data-video]');
+    if (card) open(card.getAttribute('data-video'));
+  });
+  grid.addEventListener('keydown', (e) => {
+    const card = e.target.closest('.vcard[data-video]');
+    if (card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(card.getAttribute('data-video')); }
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();

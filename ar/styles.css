@@ -545,4 +545,10 @@ a{text-decoration:none}
 .brand-bar__nav{display:flex;align-items:center;gap:18px}
 .lang-switch{font:500 13px/1 var(--sans);color:var(--ink);opacity:.72;white-space:nowrap}
 .lang-switch:hover{opacity:1;color:var(--accent)}
-@media (max-width:640px){ .brand-bar__nav{gap:12px} .lang-switch{font-size:12px} }
+@media (max-width:640px){
+  .brand-bar__inner{gap:8px}
+  .logo{font-size:19px}
+  .brand-bar__nav{gap:10px}
+  .lang-switch{font-size:12px}
+  .btn--bar{padding:9px 13px;font-size:11px;gap:6px}
+}

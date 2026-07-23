@@ -22,19 +22,19 @@ const compare = [
 ];
 
 const videos = [
-  { id: 'Q2ia-DrBbCk', name: 'Shirine', role: 'Founder of Synthe Label', country: 'Lebanon', flag: '🇱🇧', result: 'Gained 12,000 followers in ~3 months' },
-  { id: 'rxw_T8n-hL8', name: 'Nour El Boubou', role: 'Founder of a Souvenir Brand', country: 'Lebanon', flag: '🇱🇧', result: 'Built a recognizable souvenir brand through Film Levant\'s content system' },
-  { id: 'yOzWALWUTGI', name: 'Mariam Ayach', role: 'PhD in Biochemistry', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 500,000 followers' },
-  { id: 'FeKmsaKkG7o', name: 'Mariam', role: 'Dentist', country: 'Tripoli, Lebanon', flag: '🇱🇧', result: 'Built a stronger personal brand and online presence through strategic content' },
-  { id: 'me_10Nio1g8', name: 'Wafaa', role: 'Pharmacist', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 250,000 followers and built two successful businesses' },
-  { id: 'OTY1BiaYH_I', name: 'Dr. Ali Moghniyeh', role: 'Doctor & Entrepreneur', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to 110,000 followers and built the successful ONAD brand' },
+  { id: 'Q2ia-DrBbCk', name: 'شيرين', role: 'مؤسِّسة Synthe Label', country: 'لبنان', flag: '🇱🇧', result: 'حقّقت 12,000 متابع خلال 3 أشهر تقريباً' },
+  { id: 'rxw_T8n-hL8', name: 'نور البوبو', role: 'مؤسِّسة علامة هدايا تذكارية', country: 'لبنان', flag: '🇱🇧', result: 'بنَت علامة تذكارية معروفة عبر نظام المحتوى في Film Levant' },
+  { id: 'yOzWALWUTGI', name: 'مريم عيّاش', role: 'دكتوراه في الكيمياء الحيوية', country: 'لبنان', flag: '🇱🇧', result: 'انطلقت من الصفر إلى قرابة 500,000 متابع' },
+  { id: 'FeKmsaKkG7o', name: 'مريم', role: 'طبيبة أسنان', country: 'طرابلس، لبنان', flag: '🇱🇧', result: 'عزّزت علامتها الشخصية وحضورها الرقمي عبر محتوى استراتيجي' },
+  { id: 'me_10Nio1g8', name: 'وفاء', role: 'صيدلانية', country: 'لبنان', flag: '🇱🇧', result: 'انطلقت من الصفر إلى قرابة 250,000 متابع وأسّست مشروعين ناجحين' },
+  { id: 'OTY1BiaYH_I', name: 'د. علي مغنية', role: 'طبيب وريادي أعمال', country: 'لبنان', flag: '🇱🇧', result: 'انطلق من الصفر إلى 110,000 متابع وبنى علامة ONAD الناجحة' },
 ];
 
 const aliStats = [
-  { value: '10,000+', label: 'Videos Produced' },
-  { value: '150+', label: 'Doctors, Coaches & Consultants Helped' },
-  { value: '1B+', label: 'Views Generated Across Client Accounts' },
-  { value: 'A–Z', label: 'Authority Growth System' },
+  { value: '10,000+', label: 'فيديو تمّ إنتاجه' },
+  { value: '150+', label: 'من الأطباء والمدرّبين والمستشارين' },
+  { value: '1B+', label: 'مشاهدة على حسابات عملائنا' },
+  { value: 'A–Z', label: 'منظومة متكاملة لبناء المرجعية' },
 ];
 
 const steps = [
@@ -99,9 +99,9 @@ set('compare-new', compare.map((c) => `
   <div class="compare__row compare__row--new"><span class="compare__icon compare__icon--new">✓</span><span>${esc(c.ours)}</span></div>`).join(''));
 
 set('video-list', videos.map((v) => `
-  <article class="vcard" data-video="${v.id}" role="button" tabindex="0" aria-label="Play ${esc(v.name)}'s video testimonial">
+  <article class="vcard" data-video="${v.id}" role="button" tabindex="0" aria-label="شاهد شهادة ${esc(v.name)}">
     <div class="vcard__thumb">
-      <img class="vcard__img" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${esc(v.name)} testimonial" loading="lazy">
+      <img class="vcard__img" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="شهادة ${esc(v.name)}" loading="lazy">
       <span class="vcard__play"><span class="play-btn play-btn--sm"><span class="play-btn__triangle play-btn__triangle--sm"></span></span></span>
     </div>
     <div class="vcard__body">
@@ -206,25 +206,25 @@ set('path-b', pathB.map((m) => `
     let instagram = form.instagram.value.trim();
     const missing = [];
 
-    if (!firstName) missing.push('First name');
+    if (!firstName) missing.push('الاسم الأول');
 
     let phone = '';
     if (iti) {
       const hasUtils = typeof iti.isValidNumber === 'function';
-      if (!phoneInput.value.trim() || (hasUtils && !iti.isValidNumber())) missing.push('a valid Phone number');
+      if (!phoneInput.value.trim() || (hasUtils && !iti.isValidNumber())) missing.push('رقم هاتف صحيح');
       else phone = iti.getNumber() || phoneInput.value.trim();
     } else if (!phoneInput.value.trim()) {
-      missing.push('Phone');
+      missing.push('رقم الهاتف');
     } else {
       phone = phoneInput.value.trim();
     }
 
-    if (!email || !emailRe.test(email)) missing.push('a valid Email');
-    if (!instagram) missing.push('Instagram handle');
+    if (!email || !emailRe.test(email)) missing.push('بريد إلكتروني صحيح');
+    if (!instagram) missing.push('حساب إنستغرام');
 
     if (missing.length) {
       errBox.hidden = false;
-      errBox.textContent = '⚠️ Please add: ' + missing.join(', ');
+      errBox.textContent = '⚠️ يرجى إكمال: ' + missing.join('، ');
       errBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       return;
     }
@@ -245,7 +245,7 @@ set('path-b', pathB.map((m) => `
     (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead' });
 
     const btn = form.querySelector('.form-submit');
-    if (btn) { btn.disabled = true; btn.textContent = 'Booking…'; }
+    if (btn) { btn.disabled = true; btn.textContent = 'جارٍ الحجز…'; }
 
     let navigated = false;
     const go = () => {
@@ -317,7 +317,7 @@ set('path-b', pathB.map((m) => `
     frame.className = 'vsl-player__frame';
     const iframe = document.createElement('iframe');
     iframe.src = src;
-    iframe.title = 'Film Levant — Watch How We Build Industry Authority';
+    iframe.title = 'Film Levant — شاهد كيف نصنع المرجعية في مجالك';
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
     iframe.setAttribute('allowfullscreen', '');
     frame.appendChild(iframe);
@@ -359,7 +359,7 @@ set('path-b', pathB.map((m) => `
   function open(id) {
     if (!lb) build();
     lb.querySelector('.vlb__frame').innerHTML =
-      '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="Video testimonial" ' +
+      '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="شهادة فيديو" ' +
       'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';

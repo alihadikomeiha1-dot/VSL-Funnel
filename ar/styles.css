@@ -5,8 +5,8 @@
   --card: #F8F4F0;
   --ink: #050505;
   --accent: #B82A2A;
-  --serif: 'Newsreader', serif;
-  --sans: 'Space Grotesk', sans-serif;
+  --serif: 'El Messiri', serif;
+  --sans: 'IBM Plex Sans Arabic', sans-serif;
 }
 
 *{box-sizing:border-box}
@@ -516,6 +516,30 @@ a{text-decoration:none}
   .tcard{flex:0 0 100%}
   .tp-arrow{display:none}          /* mobile: swipe instead */
 }
+
+/* ============================================================
+   AR — Arabic typography + RTL
+   ============================================================ */
+/* Arabic script must never be letter-spaced (it breaks glyph joining) */
+*, *::before, *::after { letter-spacing: normal !important; }
+
+/* Comfortable line-height for Arabic headings + body */
+.hero__title, .section__title, .vsl-section__title, .final-cta__title,
+.founder__name, .modal__title { line-height: 1.22; }
+.hero__lede, .vsl-section__desc, .final-cta__lede, .founder__bio,
+.modal__sub, .badge { line-height: 1.85; }
+
+/* Latin wordmark + numbers stay LTR inside the RTL page */
+.stat__value { direction: ltr; }
+.logo, .logo--footer { direction: ltr; unicode-bidi: isolate; }
+
+/* Form: Arabic labels (RTL) + Latin inputs (LTR) */
+#f-email, #f-ig, #f-phone { direction: ltr; text-align: left; }
+.iti { direction: ltr; }
+
+/* RTL: move close buttons to the visual start (left) */
+[dir="rtl"] .modal__close { right: auto; left: 16px; }
+[dir="rtl"] .vlb__close { right: auto; left: 20px; }
 
 /* Language switcher (brand bar) */
 .brand-bar__nav{display:flex;align-items:center;gap:18px}

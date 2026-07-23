@@ -24,7 +24,7 @@ const compare = [
 const CDN = 'https://assets.cdn.filesafe.space/hj1YDq6Ep2wSH4nrh7iU/media/';
 const videos = [
   { src: CDN + '6a626ae0ca81015f1c6e2776.mp4', name: 'د. مريم', role: 'طبيبة أسنان', country: 'طرابلس، لبنان', flag: '🇱🇧', result: 'عزّزت علامتها الشخصية وحضورها الرقمي عبر محتوى استراتيجي' },
-  { src: CDN + '6a626d420e0316cbe0ed4cdb.mp4', name: 'د. علاء شيخ', role: 'طبيب', country: 'لبنان', flag: '🇱🇧', result: '' },
+  { src: CDN + '6a626d420e0316cbe0ed4cdb.mp4', name: 'د. علاء شيخ', role: 'طبيب أسنان', country: 'لبنان', flag: '🇱🇧', result: 'عزّز علامته الشخصية وحضوره الرقمي عبر محتوى استراتيجي' },
   { src: CDN + '6a626ae0fb06386ede89eaf2.mp4', name: 'مريم عيّاش', role: 'دكتوراه في الكيمياء الحيوية', country: 'لبنان', flag: '🇱🇧', result: 'انطلقت من الصفر إلى قرابة 500,000 متابع' },
   { src: CDN + '6a626ae0b86ae42034dfaeea.mp4', name: 'د. علي مغنية', role: 'طبيب وريادي أعمال', country: 'لبنان', flag: '🇱🇧', result: 'انطلق من الصفر إلى 110,000 متابع وبنى علامة ONAD الناجحة' },
   { src: CDN + '6a626ae02e0540011f47be57.mp4', name: 'شيرين البوبو', role: 'مؤسِّسة Synthe Label', country: 'لبنان', flag: '🇱🇧', result: 'حقّقت 12,000 متابع خلال 3 أشهر تقريباً' },
@@ -111,7 +111,7 @@ set('video-list', videos.map((v) => `
       <div class="vcard__name">${esc(v.name)}</div>
       <div class="vcard__role">${esc(v.role)}</div>
       <div class="vcard__result">${esc(v.result)}</div>
-      <span class="vcard__country">${v.flag} ${esc(v.country)}</span>
+      <span class="vcard__country">${esc(v.country)}</span>
     </div>
   </article>`).join(''));
 

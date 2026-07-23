@@ -24,7 +24,7 @@ const compare = [
 const CDN = 'https://assets.cdn.filesafe.space/hj1YDq6Ep2wSH4nrh7iU/media/';
 const videos = [
   { src: CDN + '6a626ae0ca81015f1c6e2776.mp4', name: 'Dr. Mariam', role: 'Dentist', country: 'Tripoli, Lebanon', flag: '🇱🇧', result: 'Built a stronger personal brand and online presence through strategic content' },
-  { src: CDN + '6a626d420e0316cbe0ed4cdb.mp4', name: 'Dr. Alaa Shekh', role: 'Doctor', country: 'Lebanon', flag: '🇱🇧', result: '' },
+  { src: CDN + '6a626d420e0316cbe0ed4cdb.mp4', name: 'Dr. Alaa Shekh', role: 'Dentist', country: 'Lebanon', flag: '🇱🇧', result: 'Built a stronger personal brand and online presence through strategic content' },
   { src: CDN + '6a626ae0fb06386ede89eaf2.mp4', name: 'Mariam Ayach', role: 'PhD in Biochemistry', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 500,000 followers' },
   { src: CDN + '6a626ae0b86ae42034dfaeea.mp4', name: 'Dr. Ali Moghniyeh', role: 'Doctor & Entrepreneur', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to 110,000 followers and built the successful ONAD brand' },
   { src: CDN + '6a626ae02e0540011f47be57.mp4', name: 'Shirine El Boubou', role: 'Founder of Synthe Label', country: 'Lebanon', flag: '🇱🇧', result: 'Gained 12,000 followers in ~3 months' },
@@ -111,7 +111,7 @@ set('video-list', videos.map((v) => `
       <div class="vcard__name">${esc(v.name)}</div>
       <div class="vcard__role">${esc(v.role)}</div>
       <div class="vcard__result">${esc(v.result)}</div>
-      <span class="vcard__country">${v.flag} ${esc(v.country)}</span>
+      <span class="vcard__country">${esc(v.country)}</span>
     </div>
   </article>`).join(''));
 

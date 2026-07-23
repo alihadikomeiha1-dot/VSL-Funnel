@@ -258,7 +258,7 @@ set('path-b', pathB.map((m) => `
         phone: phone,
         instagram: instagram,
       });
-      location.href = (SITE.surveyUrl || 'apply') + '?' + q.toString();
+      location.href = '/ar/' + (SITE.surveyUrl || 'apply') + '?' + q.toString();
     };
 
     // POST to Agenci.io — never let a slow/failed webhook block the booking

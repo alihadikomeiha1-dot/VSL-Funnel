@@ -62,10 +62,14 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
     <h1 class="hero__title">من خبيرٍ لا يعرفه أحد إلى <em class="accent-em">المرجع الأول في مجالك</em></h1>
     <p class="hero__lede">عبر نظام محتوى ننفّذه معك بالكامل — دون تخمين، ودون تذبذب، ودون أن تُهدر وقتك في التصوير بنفسك بعد اليوم.</p>
     <div class="vsl-player" data-screen-label="VSL Player">
-      <div class="vsl-player__poster">
-        <button class="vsl-player__btn" type="button" aria-label="تشغيل الفيديو"><span class="vsl-player__tri"></span></button>
-        <span class="vsl-player__hint">— أضِف رابط الفيديو في config.js (vslEmbed) —</span>
+      <video class="vsl-video" muted loop playsinline preload="metadata"></video>
+      <div class="vsl-player__overlay">
+        <span class="vsl-player__btn"><span class="vsl-player__tri"></span></span>
+        <span class="vsl-player__cue">انقر لتشغيل الفيديو بالصوت</span>
       </div>
+      <button class="vsl-sound" type="button" aria-label="تشغيل بالصوت">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9z"/><path d="M15.5 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.8 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
     </div>
     <div class="vsl-cta"><a href="#book-a-call" class="btn btn--lg btn--accent">احجز استشارتك الاستراتيجية<span class="dot dot--md"></span></a></div>
   </div>

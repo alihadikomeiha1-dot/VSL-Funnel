@@ -21,13 +21,15 @@ const compare = [
   { old: 'Getting zero client inquiries from content', ours: 'Predictable lead flow and authority positioning' },
 ];
 
+const CDN = 'https://assets.cdn.filesafe.space/hj1YDq6Ep2wSH4nrh7iU/media/';
 const videos = [
-  { id: 'Q2ia-DrBbCk', name: 'Shirine', role: 'Founder of Synthe Label', country: 'Lebanon', flag: '🇱🇧', result: 'Gained 12,000 followers in ~3 months' },
-  { id: 'rxw_T8n-hL8', name: 'Nour El Boubou', role: 'Founder of a Souvenir Brand', country: 'Lebanon', flag: '🇱🇧', result: 'Built a recognizable souvenir brand through Film Levant\'s content system' },
-  { id: 'yOzWALWUTGI', name: 'Mariam Ayach', role: 'PhD in Biochemistry', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 500,000 followers' },
-  { id: 'FeKmsaKkG7o', name: 'Mariam', role: 'Dentist', country: 'Tripoli, Lebanon', flag: '🇱🇧', result: 'Built a stronger personal brand and online presence through strategic content' },
-  { id: 'me_10Nio1g8', name: 'Wafaa', role: 'Pharmacist', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 250,000 followers and built two successful businesses' },
-  { id: 'OTY1BiaYH_I', name: 'Dr. Ali Moghniyeh', role: 'Doctor & Entrepreneur', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to 110,000 followers and built the successful ONAD brand' },
+  { src: CDN + '6a626ae0ca81015f1c6e2776.mp4', name: 'Dr. Mariam', role: 'Dentist', country: 'Tripoli, Lebanon', flag: '🇱🇧', result: 'Built a stronger personal brand and online presence through strategic content' },
+  { src: CDN + '6a626d420e0316cbe0ed4cdb.mp4', name: 'Dr. Alaa Shekh', role: 'Doctor', country: 'Lebanon', flag: '🇱🇧', result: '' },
+  { src: CDN + '6a626ae0fb06386ede89eaf2.mp4', name: 'Mariam Ayach', role: 'PhD in Biochemistry', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 500,000 followers' },
+  { src: CDN + '6a626ae0b86ae42034dfaeea.mp4', name: 'Dr. Ali Moghniyeh', role: 'Doctor & Entrepreneur', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to 110,000 followers and built the successful ONAD brand' },
+  { src: CDN + '6a626ae02e0540011f47be57.mp4', name: 'Shirine El Boubou', role: 'Founder of Synthe Label', country: 'Lebanon', flag: '🇱🇧', result: 'Gained 12,000 followers in ~3 months' },
+  { src: CDN + '6a626ae0df29341f4d654017.mp4', name: 'Nour El Boubou', role: 'Founder of a Souvenir Brand', country: 'Lebanon', flag: '🇱🇧', result: 'Built a recognizable souvenir brand through Film Levant\'s content system' },
+  { src: CDN + '6a626ae023b7828d3541c97c.mp4', name: 'Wafaa', role: 'Pharmacist', country: 'Lebanon', flag: '🇱🇧', result: 'Grew from scratch to nearly 250,000 followers and built two successful businesses' },
 ];
 
 const aliStats = [
@@ -99,9 +101,9 @@ set('compare-new', compare.map((c) => `
   <div class="compare__row compare__row--new"><span class="compare__icon compare__icon--new">✓</span><span>${esc(c.ours)}</span></div>`).join(''));
 
 set('video-list', videos.map((v) => `
-  <article class="vcard" data-video="${v.id}" role="button" tabindex="0" aria-label="Play ${esc(v.name)}'s video testimonial">
+  <article class="vcard" data-src="${esc(v.src)}" role="button" tabindex="0" aria-label="Play ${esc(v.name)}'s video testimonial">
     <div class="vcard__thumb">
-      <img class="vcard__img" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${esc(v.name)} testimonial" loading="lazy">
+      <video class="vcard__video" src="${esc(v.src)}#t=0.5" muted playsinline preload="metadata"></video>
       <span class="vcard__play"><span class="play-btn play-btn--sm"><span class="play-btn__triangle play-btn__triangle--sm"></span></span></span>
     </div>
     <div class="vcard__body">
@@ -300,42 +302,33 @@ set('path-b', pathB.map((m) => `
 })();
 
 // ============================================================
-// Premium VSL player — click-to-load YouTube/Vimeo facade
+// Premium VSL — muted looping preview; click (or the sound icon) to play with sound
 // ============================================================
 (function () {
   const player = document.querySelector('.vsl-player');
   if (!player) return;
-  const btn = player.querySelector('.vsl-player__btn');
-  const hint = player.querySelector('.vsl-player__hint');
-  const raw = (window.SITE && window.SITE.vslEmbed) || '';
-  const src = toEmbedUrl(raw);
-  if (src && hint) hint.style.display = 'none';
-  if (!btn) return;
-  player.addEventListener('click', () => {
-    if (!src) { player.classList.add('vsl-player--empty'); return; }
-    const frame = document.createElement('div');
-    frame.className = 'vsl-player__frame';
-    const iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.title = 'Film Levant — Watch How We Build Industry Authority';
-    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-    iframe.setAttribute('allowfullscreen', '');
-    frame.appendChild(iframe);
-    player.innerHTML = '';
-    player.appendChild(frame);
-  });
+  const video = player.querySelector('.vsl-video');
+  const overlay = player.querySelector('.vsl-player__overlay');
+  const soundBtn = player.querySelector('.vsl-sound');
+  const src = (window.SITE && window.SITE.vslEmbed) || '';
+  if (!video || !src) { player.classList.add('vsl-player--empty'); return; }
 
-  function toEmbedUrl(v) {
-    v = String(v || '').trim();
-    if (!v) return '';
-    if (/youtube\.com\/embed\/|player\.vimeo\.com\/video\//.test(v)) return v + (v.includes('?') ? '&' : '?') + 'autoplay=1';
-    let m;
-    if ((m = v.match(/(?:youtu\.be\/|[?&]v=|youtube\.com\/shorts\/)([\w-]{11})/))) return 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&rel=0';
-    if (/^[\w-]{11}$/.test(v)) return 'https://www.youtube.com/embed/' + v + '?autoplay=1&rel=0';
-    if ((m = v.match(/vimeo\.com\/(?:video\/)?(\d+)/))) return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1';
-    if (/^\d+$/.test(v)) return 'https://player.vimeo.com/video/' + v + '?autoplay=1';
-    return '';
+  video.src = src;
+  video.play().catch(() => {}); // muted autoplay loop preview
+
+  let activated = false;
+  function activate() {
+    if (activated) return; activated = true;
+    video.muted = false;
+    video.loop = false;
+    video.controls = true;
+    try { video.currentTime = 0; } catch (e) {}
+    video.play().catch(() => {});
+    player.classList.add('is-playing');
+    if (window.fbq && window.SITE && window.SITE.pixelId) fbq('track', 'ViewContent');
   }
+  if (overlay) overlay.addEventListener('click', activate);
+  if (soundBtn) soundBtn.addEventListener('click', (e) => { e.stopPropagation(); activate(); });
 })();
 
 // ============================================================
@@ -356,11 +349,10 @@ set('path-b', pathB.map((m) => `
     document.body.appendChild(lb);
     lb.addEventListener('click', (e) => { if (e.target.closest('[data-vclose]')) close(); });
   }
-  function open(id) {
+  function open(src) {
     if (!lb) build();
     lb.querySelector('.vlb__frame').innerHTML =
-      '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" title="Video testimonial" ' +
-      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+      '<video src="' + src + '" controls autoplay playsinline preload="metadata"></video>';
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
@@ -372,12 +364,12 @@ set('path-b', pathB.map((m) => `
   }
 
   grid.addEventListener('click', (e) => {
-    const card = e.target.closest('.vcard[data-video]');
-    if (card) open(card.getAttribute('data-video'));
+    const card = e.target.closest('.vcard[data-src]');
+    if (card) open(card.getAttribute('data-src'));
   });
   grid.addEventListener('keydown', (e) => {
-    const card = e.target.closest('.vcard[data-video]');
-    if (card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(card.getAttribute('data-video')); }
+    const card = e.target.closest('.vcard[data-src]');
+    if (card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(card.getAttribute('data-src')); }
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();

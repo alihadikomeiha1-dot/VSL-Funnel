@@ -122,10 +122,10 @@ a{text-decoration:none}
 .vsl-frame__center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .vsl-frame__hint{font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;color:rgba(5,5,5,.48)}
 
-.play-btn{border-radius:50%;background:var(--bg1);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center}
-.play-btn--lg{width:84px;height:84px;box-shadow:0 14px 34px rgba(5,5,5,.2)}
-.play-btn--sm{width:46px;height:46px;box-shadow:0 5px 14px rgba(5,5,5,.16)}
-.play-btn__triangle{width:0;height:0;border-style:solid;border-color:transparent transparent transparent var(--accent)}
+.play-btn{border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center}
+.play-btn--lg{width:84px;height:84px;box-shadow:0 14px 34px rgba(184,42,42,.42)}
+.play-btn--sm{width:46px;height:46px;box-shadow:0 6px 16px rgba(184,42,42,.4)}
+.play-btn__triangle{width:0;height:0;border-style:solid;border-color:transparent transparent transparent #fff}
 .play-btn__triangle--lg{border-width:15px 0 15px 24px;margin-left:6px}
 .play-btn__triangle--sm{border-width:8px 0 8px 13px;margin-left:3px}
 
@@ -199,10 +199,10 @@ a{text-decoration:none}
 }
 .vcard:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(5,5,5,.12)}
 .vcard__thumb{
-  flex:none;width:104px;aspect-ratio:3/4;border-radius:12px;position:relative;overflow:hidden;
-  border:1px solid rgba(5,5,5,.1);background:#e6ded6;
+  flex:none;width:132px;aspect-ratio:16/10;border-radius:12px;position:relative;overflow:hidden;
+  border:1px solid rgba(5,5,5,.1);background:#0a0807;
 }
-.vcard__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vcard__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .vcard__play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,5,5,.14);transition:background .2s ease}
 .vcard:hover .vcard__play{background:rgba(5,5,5,.24)}
 .vcard__body{min-width:0}
@@ -212,12 +212,12 @@ a{text-decoration:none}
 .vcard__result{margin-top:6px;font:400 12.5px/1.45 var(--sans);color:rgba(5,5,5,.62)}
 .vcard__country{align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;background:rgba(5,5,5,.05);border:1px solid rgba(5,5,5,.1);font:500 10.5px/1 var(--sans);color:rgba(5,5,5,.6)}
 
-/* Video testimonial lightbox (portrait — testimonial reels) */
+/* Video testimonial lightbox (landscape 16:9) */
 .vlb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center}
 .vlb.is-open{display:flex}
 .vlb__backdrop{position:absolute;inset:0;background:rgba(5,5,5,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.vlb__frame{position:relative;z-index:1;width:min(92vw,48vh);aspect-ratio:9/16;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.7)}
-.vlb__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vlb__frame{position:relative;z-index:1;width:min(92vw,960px);max-height:86vh;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.7)}
+.vlb__frame video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:contain;background:#000;display:block}
 .vlb__close{position:fixed;top:18px;right:20px;z-index:2;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.16);color:#fff;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center}
 .vlb__close:hover{background:rgba(255,255,255,.28)}
 
@@ -440,14 +440,18 @@ a{text-decoration:none}
   border:1px solid rgba(255,255,255,.1);
   box-shadow:0 40px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(184,42,42,.12);
 }
-.vsl-player__poster{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;background:radial-gradient(70% 70% at 50% 42%, #1b1613, #0a0807)}
-.vsl-player__btn{width:88px;height:88px;border-radius:50%;border:none;cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 18px 50px rgba(184,42,42,.5);transition:transform .2s ease}
-.vsl-player__poster:hover .vsl-player__btn{transform:scale(1.06)}
+.vsl-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#050505}
+.vsl-player__overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(180deg,rgba(5,5,5,.12),rgba(5,5,5,.34));transition:opacity .35s ease}
+.vsl-player__btn{flex:none;width:88px;height:88px;border-radius:50%;border:none;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 18px 50px rgba(184,42,42,.5);transition:transform .2s ease}
+.vsl-player__overlay:hover .vsl-player__btn{transform:scale(1.06)}
 .vsl-player__tri{width:0;height:0;border-style:solid;border-width:14px 0 14px 24px;border-color:transparent transparent transparent #fff;margin-left:6px}
-.vsl-player__hint{font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.05em;color:rgba(245,240,240,.4)}
-.vsl-player--empty .vsl-player__hint{color:var(--accent)}
-.vsl-player__frame{position:absolute;inset:0}
-.vsl-player__frame iframe{width:100%;height:100%;border:0;display:block}
+.vsl-player__cue{position:absolute;left:clamp(16px,3.2vw,32px);top:50%;transform:translateY(-50%);max-width:34%;font:600 clamp(13px,1.6vw,17px)/1.35 var(--sans);color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.65);pointer-events:none}
+.vsl-sound{position:absolute;top:16px;right:16px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);cursor:pointer;background:rgba(5,5,5,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .2s ease}
+.vsl-sound:hover{background:var(--accent);transform:scale(1.06)}
+.vsl-player.is-playing .vsl-player__overlay{opacity:0;pointer-events:none}
+.vsl-player.is-playing .vsl-sound{display:none}
+.vsl-player--empty{display:flex;align-items:center;justify-content:center}
+.vsl-player--empty::after{content:'VSL';font:600 12px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;color:var(--accent)}
 /* CTA directly below the VSL video — centered, 40px gap, same button styling */
 .vsl-cta{margin-top:40px;text-align:center}
 

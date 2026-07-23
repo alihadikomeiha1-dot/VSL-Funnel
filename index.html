@@ -62,10 +62,14 @@ s.setAttribute('data-tracking-id',t.id);document.head.appendChild(s);})();</scri
     <h1 class="hero__title">Go from Invisible Expert to <em class="accent-em">Industry Authority</em></h1>
     <p class="hero__lede">With our done-with-you content system, without relying on guesswork, inconsistency, or wasting time filming yourself again.</p>
     <div class="vsl-player" data-screen-label="VSL Player">
-      <div class="vsl-player__poster">
-        <button class="vsl-player__btn" type="button" aria-label="Play video"><span class="vsl-player__tri"></span></button>
-        <span class="vsl-player__hint">— add your video in config.js (vslEmbed) —</span>
+      <video class="vsl-video" muted loop playsinline preload="metadata"></video>
+      <div class="vsl-player__overlay">
+        <span class="vsl-player__btn"><span class="vsl-player__tri"></span></span>
+        <span class="vsl-player__cue">Click to play the video</span>
       </div>
+      <button class="vsl-sound" type="button" aria-label="Play with sound">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9z"/><path d="M15.5 8.5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.8 6.2a7 7 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
     </div>
     <div class="vsl-cta"><a href="#book-a-call" class="btn btn--lg btn--accent">Book Your Strategy Call<span class="dot dot--md"></span></a></div>
   </div>

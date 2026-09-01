@@ -214,6 +214,12 @@ set('path-b', pathB.map((m) => `
 
     let phone = '';
     if (iti) {
+      // Re-sync iti's internal parsed number from the live DOM value first —
+      // Safari can fire the last keystroke's input event after this handler
+      // starts, leaving isValidNumber() reading a stale/incomplete number.
+      if (phoneInput.value.trim()) {
+        try { iti.setNumber(phoneInput.value.trim()); } catch (err) {}
+      }
       const hasUtils = typeof iti.isValidNumber === 'function';
       if (!phoneInput.value.trim() || (hasUtils && !iti.isValidNumber())) missing.push('a valid Phone number');
       else phone = iti.getNumber() || phoneInput.value.trim();
